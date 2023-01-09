@@ -1,18 +1,31 @@
 import { useState } from 'react'
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useRouteMatch,
+  useHistory,
+} from "react-router-dom"
+
+// Component Menu
 const Menu = () => {
   const padding = {
     paddingRight: 5
   }
   return (
     <div>
-      <a href='#' style={padding}>anecdotes</a>
-      <a href='#' style={padding}>create new</a>
-      <a href='#' style={padding}>about</a>
+      <Link style={padding} to="/">anecdotes</Link>
+      <Link style={padding} to="/createnew">create new</Link>
+      <Link style={padding} to="/about">about</Link>
     </div>
   )
 }
 
+// Component AnecdoteList
 const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
@@ -22,6 +35,7 @@ const AnecdoteList = ({ anecdotes }) => (
   </div>
 )
 
+// Component About
 const About = () => (
   <div>
     <h2>About anecdote app</h2>
@@ -36,6 +50,7 @@ const About = () => (
   </div>
 )
 
+// Component Footer -> This component must always be shown regardless of the URL
 const Footer = () => (
   <div>
     Anecdote app for <a href='https://fullstackopen.com/'>Full Stack Open</a>.
@@ -44,6 +59,7 @@ const Footer = () => (
   </div>
 )
 
+// Component CreateNew
 const CreateNew = (props) => {
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
@@ -74,7 +90,7 @@ const CreateNew = (props) => {
         </div>
         <div>
           url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+          <input name='info' value={info} onChange={(e) => setInfo(e.target.value)} />
         </div>
         <button>create</button>
       </form>
@@ -83,6 +99,7 @@ const CreateNew = (props) => {
 
 }
 
+// Main App Component
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
     {
@@ -122,13 +139,25 @@ const App = () => {
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
 
+  const padding = {
+    paddingRight: 5
+  }
+
   return (
     <div>
       <h1>Software anecdotes</h1>
-      <Menu />
-      <AnecdoteList anecdotes={anecdotes} />
-      <About />
-      <CreateNew addNew={addNew} />
+      <Router>
+        <div>
+          <Menu />
+        </div>
+
+        <Routes>
+          <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
+          <Route path="/createnew" element={<CreateNew addNew={addNew} />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Router>
+
       <Footer />
     </div>
   )
