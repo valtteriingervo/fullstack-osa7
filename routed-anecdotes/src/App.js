@@ -83,12 +83,20 @@ const Footer = () => (
 
 // Component CreateNew
 const CreateNew = (props) => {
+  // Function for preventing warning for passign reset as props for input fields
+  const excludeReset = (useFieldObj) => {
+    const { reset, ...restOfFields } = useFieldObj
+    return restOfFields
+  }
+
   const content = useField('text')
+  const contentNoReset = excludeReset(content)
   const author = useField('text')
+  const authorNoReset = excludeReset(author)
   const info = useField('text')
+  const infoNoReset = excludeReset(info)
 
   const navigate = useNavigate()
-
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -114,15 +122,15 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input {...content} />
+          <input {...contentNoReset} />
         </div>
         <div>
           author
-          <input {...author} />
+          <input {...authorNoReset} />
         </div>
         <div>
           url for more info
-          <input {...info} />
+          <input {...infoNoReset} />
         </div>
         <button>create</button>
       </form>
