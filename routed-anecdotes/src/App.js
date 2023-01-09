@@ -10,6 +10,7 @@ import {
   useRouteMatch,
   useHistory,
   useParams,
+  useNavigate,
 } from "react-router-dom"
 
 // Component Menu
@@ -85,6 +86,8 @@ const CreateNew = (props) => {
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
 
+  const navigate = useNavigate()
+
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -94,6 +97,8 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    // After creating an anecdote, move to the anecdote list page
+    navigate('/anecdotes')
   }
 
   return (
@@ -119,6 +124,20 @@ const CreateNew = (props) => {
 
 }
 
+// Component notification
+const Notification = ({ notifText }) => {
+  if (notifText) {
+    return (
+      <div>
+        <p>a new anecdote '{notifText}' created!</p>
+      </div>
+    )
+  }
+
+  // if notifText is undefined return null
+  return null
+}
+
 // Main App Component
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
@@ -139,10 +158,21 @@ const App = () => {
   ])
 
   const [notification, setNotification] = useState('')
+  const [lastTimerID, setLastTimerID] = useState(null)
 
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
+    // Change notification text after adding a new anecdote
+    setNotification(anecdote.content)
+    // Clear the possible previous timer
+    if (lastTimerID) {
+      clearTimeout(lastTimerID)
+    }
+    // Start five second timer after which hide the notification
+    const timeoutID = setTimeout(() => { setNotification('') }, 5000)
+    // Update the timerID
+    setLastTimerID(timeoutID)
   }
 
   const anecdoteById = (id) =>
@@ -164,6 +194,7 @@ const App = () => {
       <h1>Software anecdotes</h1>
       <div>
         <Menu />
+        <Notification notifText={notification} />
       </div>
 
       <Routes>
