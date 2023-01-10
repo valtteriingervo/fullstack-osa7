@@ -7,6 +7,22 @@
     {
       "content": "the best featrure ever <3",
       "id": 2
+    },
+    {
+      "content": "Hello notes",
+      "id": 3
+    },
+    {
+      "content": "Best note ever",
+      "id": 4
+    },
+    {
+      "content": "Coolest thing out there!",
+      "id": 5
+    },
+    {
+      "content": "Saying hi to JSON server",
+      "id": 6
     }
   ],
   "persons": [
@@ -19,6 +35,21 @@
       "name": "kaltsoon",
       "number": "045-2323456",
       "id": 2
+    },
+    {
+      "name": "Henry",
+      "number": "044-2132131",
+      "id": 3
+    },
+    {
+      "name": "Jennifer",
+      "number": "050-213213921",
+      "id": 4
+    },
+    {
+      "name": "Mathilda",
+      "number": "094-32189321",
+      "id": 5
     }
   ]
 }
