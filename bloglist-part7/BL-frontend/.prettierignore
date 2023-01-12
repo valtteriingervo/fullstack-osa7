@@ -1,0 +1,17 @@
+# Ignore similar files as ESlint does
+node_modules
+build
+.eslintrc.js
+
+# ... and as .gitignore does. Remove node-modules and build though as they would be duplicates
+/.pnp
+.pnp.js
+/coverage
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
