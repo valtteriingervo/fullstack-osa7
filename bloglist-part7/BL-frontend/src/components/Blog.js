@@ -2,7 +2,6 @@ import { useState } from 'react'
 import PropTypes from 'prop-types'
 import blogService from '../services/blogs'
 
-
 const Blog = ({ blog, handleBlogLike }) => {
   const [viewAll, setViewAll] = useState(false)
   const [removed, setRemoved] = useState('')
@@ -13,7 +12,7 @@ const Blog = ({ blog, handleBlogLike }) => {
     border: 'solid',
     borderWidth: 1,
     marginBottom: 5,
-    display: removed
+    display: removed,
   }
 
   // If blog.likes is undefined set it to zero for the component
@@ -25,7 +24,7 @@ const Blog = ({ blog, handleBlogLike }) => {
       likes: blogLikes + 1,
       author: blog.author,
       title: blog.title,
-      url: blog.url
+      url: blog.url,
     }
 
     // Pass the updated blog to the prop function
@@ -34,8 +33,7 @@ const Blog = ({ blog, handleBlogLike }) => {
   }
 
   const deleteBlog = async () => {
-    const windowText =
-      `Remove blog ${blog.title} by ${blog.author}?`
+    const windowText = `Remove blog ${blog.title} by ${blog.author}?`
 
     if (window.confirm(windowText)) {
       await blogService.deleteBlog(blog.id)
@@ -51,24 +49,29 @@ const Blog = ({ blog, handleBlogLike }) => {
 
   return (
     <div style={blogStyle}>
-      <div className='blog'>
-        <p id='info-title-author'>{blog.title} - {blog.author}</p>
+      <div className="blog">
+        <p id="info-title-author">
+          {blog.title} - {blog.author}
+        </p>
         <button onClick={toggleAll}>view</button>
-        <div style={displayToggle} className='extraInfo'>
-          <p id='info-url'>{blog.url}</p>
-          <p id='info-likes'>likes {blogLikes}</p>
-          <button id='like-button' onClick={likeBlog}>like</button>
-          <p id='info-user-name'>{blog.user.name}</p>
-          <button id='remove-button' onClick={deleteBlog}>remove</button>
+        <div style={displayToggle} className="extraInfo">
+          <p id="info-url">{blog.url}</p>
+          <p id="info-likes">likes {blogLikes}</p>
+          <button id="like-button" onClick={likeBlog}>
+            like
+          </button>
+          <p id="info-user-name">{blog.user.name}</p>
+          <button id="remove-button" onClick={deleteBlog}>
+            remove
+          </button>
         </div>
       </div>
-    </div >
+    </div>
   )
-
 }
 
 Blog.propTypes = {
-  handleBlogLike: PropTypes.func.isRequired
+  handleBlogLike: PropTypes.func.isRequired,
 }
 
 export default Blog

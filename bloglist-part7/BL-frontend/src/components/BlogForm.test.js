@@ -32,4 +32,3 @@ describe('<BlogForm />', () => {
     expect(createBlog.mock.calls[0][2]).toBe('www.fishing-blog.com')
   })
 })
-

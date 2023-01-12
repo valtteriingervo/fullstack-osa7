@@ -11,7 +11,6 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import './index.css'
 
-
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
@@ -45,7 +44,9 @@ const App = () => {
     setNotifMessage(message)
     setTypeOfNotifMessage(typeOfMsg)
     // Hide the notification message after X seconds
-    setTimeout(() => { setNotifMessage(null) }, timeInSec * 1000)
+    setTimeout(() => {
+      setNotifMessage(null)
+    }, timeInSec * 1000)
   }
 
   const handleLogin = async (event) => {
@@ -53,7 +54,8 @@ const App = () => {
 
     try {
       const user = await loginService.login({
-        username, password
+        username,
+        password,
       })
       // Set user in browser localstorage
       window.localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
@@ -67,7 +69,6 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (exception) {
-
       showNotifMessage(
         'Wrong username or password. Please try again',
         'error',
@@ -90,10 +91,7 @@ const App = () => {
     blogService.setToken(null)
   }
 
-
-
   const createNewBlog = async (title, author, url) => {
-
     try {
       const response = await blogService.createBlog(title, author, url)
       console.log(response)
@@ -102,15 +100,10 @@ const App = () => {
 
       setBlogs(allBlogsInDB)
 
-      showNotifMessage(
-        `A new blog ${title} by ${author} added`,
-        'success',
-        3
-      )
+      showNotifMessage(`A new blog ${title} by ${author} added`, 'success', 3)
 
       // Hide the new blog form after succesful addition
       blogFormRef.current.toggleVisibility()
-
     } catch (exception) {
       if (exception.response.status === 400) {
         showNotifMessage(
@@ -121,7 +114,6 @@ const App = () => {
       }
       console.log('exception', exception)
     }
-
   }
 
   const handleBlogLike = async (blogID, blogObject) => {
@@ -143,7 +135,7 @@ const App = () => {
   // Filter only the blogs of the logged in user
   // If the user is null just use the list of all the blogs
   let usersBlogs = user
-    ? blogs.filter(blog => blog.user.username === user.username)
+    ? blogs.filter((blog) => blog.user.username === user.username)
     : blogs
 
   // Store toggleVisibility function of BlogForm Togglable component
@@ -156,7 +148,10 @@ const App = () => {
     return (
       <div>
         <h2>login</h2>
-        <Notification message={notifMessage} typeOfMessage={typeOfNotifMessage} />
+        <Notification
+          message={notifMessage}
+          typeOfMessage={typeOfNotifMessage}
+        />
         <LoginForm
           username={username}
           password={password}
@@ -183,12 +178,14 @@ const App = () => {
         <BlogForm createBlog={createNewBlog} />
       </Togglable>
       <br></br>
-      {usersBlogs.sort(compareBlogLikes).reverse().map(blog =>
-        <Blog key={blog.id} blog={blog} handleBlogLike={handleBlogLike} />
-      )}
+      {usersBlogs
+        .sort(compareBlogLikes)
+        .reverse()
+        .map((blog) => (
+          <Blog key={blog.id} blog={blog} handleBlogLike={handleBlogLike} />
+        ))}
     </div>
   )
-
 }
 
 export default App

@@ -6,7 +6,7 @@ describe('Blog', function () {
     const user = {
       name: 'Valtteri Ingervo',
       username: 'valttering',
-      password: 'salainen'
+      password: 'salainen',
     }
     cy.request('POST', 'http://localhost:3003/api/users', user)
     // And go to the site under test before each test
@@ -77,7 +77,7 @@ describe('Blog', function () {
         cy.createBlog({
           title: 'Test Blog',
           author: 'John Smith',
-          url: 'www.test-blog.com'
+          url: 'www.test-blog.com',
         })
       })
       it('Blog can be liked', function () {
@@ -123,28 +123,28 @@ describe('Blog', function () {
           title: 'Five Likes Blog',
           author: 'Jennifer Caniston',
           url: 'www.five-likes.com',
-          likes: 5
+          likes: 5,
         })
 
         cy.createBlog({
           title: 'Ten Likes Blog',
           author: 'Larry Wheeler',
           url: 'www.ten-likes.com',
-          likes: 10
+          likes: 10,
         })
 
         cy.createBlog({
           title: 'Two Likes Blog',
           author: 'Chris Cranbery',
           url: 'www.two-likes.com',
-          likes: 2
+          likes: 2,
         })
 
         cy.createBlog({
           title: 'Twenty Likes Blog',
           author: 'Julia Lullerby',
           url: 'www.twenty-likes.com',
-          likes: 20
+          likes: 20,
         })
       })
 

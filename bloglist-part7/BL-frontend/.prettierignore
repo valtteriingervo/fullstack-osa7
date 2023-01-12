@@ -3,7 +3,8 @@ node_modules
 build
 .eslintrc.js
 
-# ... and as .gitignore does. Remove node-modules and build though as they would be duplicates
+# ... and as .gitignore does. 
+# Remove node-modules and build though as they would be duplicates
 /.pnp
 .pnp.js
 /coverage

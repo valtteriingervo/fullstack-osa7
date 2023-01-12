@@ -22,7 +22,7 @@ describe('<Blog />', () => {
       likes: 12,
       url: 'www.mock-blog.com',
       user: {
-        name: 'Juuso Mockinen'
+        name: 'Juuso Mockinen',
       },
     }
 
@@ -90,4 +90,3 @@ describe('<Blog />', () => {
     expect(likeBlog.mock.calls).toHaveLength(2)
   })
 })
-
