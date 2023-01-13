@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react'
-
 // Components
 import Blog from './components/Blog'
 import Notification from './components/Notification'
@@ -10,6 +9,8 @@ import LoginForm from './components/LoginForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import './index.css'
+
+import { Page, Button } from './styled/styled'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -165,12 +166,12 @@ const App = () => {
 
   // If the user is logged in render the users blogs
   return (
-    <div>
+    <Page>
       <h2>blogs</h2>
       <Notification message={notifMessage} typeOfMessage={typeOfNotifMessage} />
       <div>
         <p>{user.username} logged in </p>
-        <button onClick={handleLogout}>logout</button>
+        <Button onClick={handleLogout}>logout</Button>
       </div>
       <br></br>
       <h2>create new</h2>
@@ -184,7 +185,7 @@ const App = () => {
         .map((blog) => (
           <Blog key={blog.id} blog={blog} handleBlogLike={handleBlogLike} />
         ))}
-    </div>
+    </Page>
   )
 }
 

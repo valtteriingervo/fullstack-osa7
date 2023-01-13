@@ -1,17 +1,13 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 import blogService from '../services/blogs'
+import { Button, BlogContainer } from '../styled/styled'
 
 const Blog = ({ blog, handleBlogLike }) => {
   const [viewAll, setViewAll] = useState(false)
   const [removed, setRemoved] = useState('')
 
   const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5,
     display: removed,
   }
 
@@ -48,25 +44,27 @@ const Blog = ({ blog, handleBlogLike }) => {
   }
 
   return (
-    <div style={blogStyle}>
-      <div className="blog">
-        <p id="info-title-author">
-          {blog.title} - {blog.author}
-        </p>
-        <button onClick={toggleAll}>view</button>
-        <div style={displayToggle} className="extraInfo">
-          <p id="info-url">{blog.url}</p>
-          <p id="info-likes">likes {blogLikes}</p>
-          <button id="like-button" onClick={likeBlog}>
-            like
-          </button>
-          <p id="info-user-name">{blog.user.name}</p>
-          <button id="remove-button" onClick={deleteBlog}>
-            remove
-          </button>
+    <BlogContainer>
+      <div style={blogStyle}>
+        <div className="blog">
+          <p id="info-title-author">
+            {blog.title} - {blog.author}
+          </p>
+          <Button onClick={toggleAll}>view</Button>
+          <div style={displayToggle} className="extraInfo">
+            <p id="info-url">{blog.url}</p>
+            <p id="info-likes">likes {blogLikes}</p>
+            <Button id="like-button" onClick={likeBlog}>
+              like
+            </Button>
+            <p id="info-user-name">{blog.user.name}</p>
+            <Button id="remove-button" onClick={deleteBlog}>
+              remove
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </BlogContainer>
   )
 }
 

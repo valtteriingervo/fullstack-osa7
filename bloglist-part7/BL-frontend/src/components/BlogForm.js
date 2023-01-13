@@ -1,6 +1,6 @@
 import { useState } from 'react'
-
 import PropTypes from 'prop-types'
+import { Button } from '../styled/styled'
 
 const BlogForm = ({ createBlog }) => {
   // Create new blog states
@@ -52,9 +52,9 @@ const BlogForm = ({ createBlog }) => {
             onChange={({ target }) => setURL(target.value)}
           />
         </div>
-        <button id="create-button" type="submit">
+        <Button id="create-button" type="submit">
           create
-        </button>
+        </Button>
       </form>
     </>
   )

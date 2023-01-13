@@ -6,7 +6,7 @@ module.exports = {
     "cypress/globals": true
   },
   "extends": [
-    "plugin:prettier/recommended"
+    "prettier"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -16,7 +16,7 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react", "jest", "cypress"
+    "react", "jest", "cypress", "prettier"
   ],
   "rules": {
     "indent": [
